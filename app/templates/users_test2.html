@@ -1,0 +1,751 @@
+{% extends "base.html" %}
+
+{% block css %}
+.text-center {
+    text-align: center !important;
+}
+{% endblock %}
+
+{% block content %}
+
+<br>
+<script>
+   var fetchData = function() {
+    function success(responseData) {
+    var mydata = JSON.parse(responseData)
+
+    console.log(mydata);
+    console.log(mydata.length)
+    console.log(mydata[0]['startup_market'])
+    var myTable = document.getElementById('myTable');
+    //for (i=0; i < mydata.length; i++) {
+    for (i=0; i < 10; i++) {
+      var target = '#basicModal'+(i+1);
+      myTable.rows[i+1].cells[1].innerHTML = '<div class="center-block"><a href="#" data-toggle="modal" data-target='+target+'><h4>'+mydata[i]['startup_name']+'</h4></a></div>';
+      //myTable.rows[i+1].cells[2].innerHTML = '<div class="center-block"><img src=' + mydata[i][2] + 'max-width="110px" height="90px" alt="Voluptatem logo"></div>';
+      //myTable.rows[i+1].cells[2].innerHTML = '<div class="center-block"><img src=' + mydata[i][2] + ' height="45px" alt="Voluptatem logo"></div>';
+      myTable.rows[i+1].cells[2].innerHTML = '<div class="center-block"><img src=' + mydata[i]['logolink'] + ' height="50px" alt="Voluptatem logo" class="img-rounded"></div>';
+      myTable.rows[i+1].cells[3].innerHTML = '<div class="center-block"><h4>' + mydata[i]['startup_market']  +' </h4></div>';
+    
+    var image = '#image'+(i+1);
+    $(image).html('<div class="center-block"><img src=' + mydata[i]['logolink'] + ' width="150px" height="100px" alt="Voluptatem logo"></div>')
+    
+    var name = '#name'+(i+1);
+    $(name).text(mydata[i]['startup_name'])
+
+     var market = '#market'+(i+1);
+    $(market).text(mydata[i]['startup_market'])
+
+     var score = '#score'+(i+1);
+    $(score).text(mydata[i]['startupSignal']+'/10')
+
+     var funding = '#funding'+(i+1);
+    $(funding).text(mydata[i]['funding'])
+    }
+
+    //$('#output1').html('<div class="center-block"><img src=' + mydata[0][2] + 'max-width="110px" height="90px" alt="Voluptatem logo"></div>')
+    //$('#output2').html('<div class="center-block"><img src=' + mydata[1][2] + 'max-width="110px" height="90px" alt="Voluptatem logo"></div>')
+  };  
+  $.get('/api/users/' + $('#investorID').val(), success);
+};
+ </script>    
+ <script type="text/javascript">
+function setContainer(what){
+if(document.getElementById(what).style.display=="none"){
+document.getElementById(what).style.display="block";
+}
+else if(document.getElementById(what).style.display=="block"){
+document.getElementById(what).style.display="block";
+}
+}
+</script>
+<script>
+ function someFunc() {
+    fetchData();
+    setContainer('myContainer');
+  
+}
+</script> 
+  </div>
+<!--<a href="#" data-toggle="modal" data-target="#basicModal"><h1 id="output1"></h1></a>-->
+
+<div class="modal fade" id="basicModal1" tabindex="-1" role="dialog" aria-labelledby="basicModal1" aria-hidden="true">
+  <div class="modal-dialog">   <!--to make box-->
+    <div class="modal-content"> <!--to make shadow-->
+      <div class="modal-header"> <!--to center content in the box-->
+          <div class="modal-body">  
+            <div class="container-fluid">
+              <div class="centered col-lg-12">
+                <div class="pin-wide">
+              <div class="row">
+                <div class="col-md-6">
+                  <h3 id="name1"></h3>
+                  <br>
+                  <div id="image1"></div>
+                  <br>
+                   <h4 id="market1"></h4>
+                </div>
+                <div class="col-md-6"> 
+                  <!--<div class="row">
+                    <div class="col-md-12">
+                      <h3>Quaddra Software</h3>
+                    </div>
+                  </div>-->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>Amount funded</em></small></h2>
+                      <h2><div class="text-center"id="funding1"></div></h2>
+                      <!--<h2>1.5M</h2>-->
+                    </div>
+                  </div>   
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>AngelList Score</em></small></h2>
+                      <h2><div class="text-center"id="score1"></div></h2>
+
+                      <!--<p class="text-center"><h2 id="score4">+/10+</h2></p>-->
+                    </div>
+                  </div>    
+                </div>
+              </div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <h4>Investors: </h4>
+
+              </div>
+            </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /.modal -->
+
+<div class="modal fade" id="basicModal2" tabindex="-1" role="dialog" aria-labelledby="basicModal2" aria-hidden="true">
+  <div class="modal-dialog">   <!--to make box-->
+    <div class="modal-content"> <!--to make shadow-->
+      <div class="modal-header"> <!--to center content in the box-->
+          <div class="modal-body">  
+            <div class="container-fluid">
+              <div class="centered col-lg-12">
+                <div class="pin-wide">
+              <div class="row">
+                <div class="col-md-6">
+                  <h3 id="name2"></h3>
+                  <br>
+                  <div id="image2"></div>
+                  <br>
+                   <h4 id="market2"></h4>
+                </div>
+                <div class="col-md-6"> 
+                  <!--<div class="row">
+                    <div class="col-md-12">
+                      <h3>Quaddra Software</h3>
+                    </div>
+                  </div>-->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>Amount funded</em></small></h2>
+                      <h2><div class="text-center"id="funding2"></div></h2>
+                      <!--<h2>1.5M</h2>-->
+                    </div>
+                  </div>   
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>AngelList Score</em></small></h2>
+                      <h2><div class="text-center"id="score2"></div></h2>
+
+                      <!--<p class="text-center"><h2 id="score4">+/10+</h2></p>-->
+                    </div>
+                  </div>    
+                </div>
+              </div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <h4>Investors: </h4>
+
+              </div>
+            </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /.modal -->
+
+<div class="modal fade" id="basicModal3" tabindex="-1" role="dialog" aria-labelledby="basicModal3" aria-hidden="true">
+  <div class="modal-dialog">   <!--to make box-->
+    <div class="modal-content"> <!--to make shadow-->
+      <div class="modal-header"> <!--to center content in the box-->
+          <div class="modal-body">  
+            <div class="container-fluid">
+              <div class="centered col-lg-12">
+                <div class="pin-wide">
+              <div class="row">
+                <div class="col-md-6">
+                  <h3 id="name3"></h3>
+                  <br>
+                  <div id="image3"></div>
+                  <br>
+                   <h4 id="market3"></h4>
+                </div>
+                <div class="col-md-6"> 
+                  <!--<div class="row">
+                    <div class="col-md-12">
+                      <h3>Quaddra Software</h3>
+                    </div>
+                  </div>-->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>Amount funded</em></small></h2>
+                      <h2><div class="text-center"id="funding3"></div></h2>
+                      <!--<h2>1.5M</h2>-->
+                    </div>
+                  </div>   
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>AngelList Score</em></small></h2>
+                      <h2><div class="text-center"id="score3"></div></h2>
+
+                      <!--<p class="text-center"><h2 id="score4">+/10+</h2></p>-->
+                    </div>
+                  </div>    
+                </div>
+              </div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <h4>Investors: </h4>
+
+              </div>
+            </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /.modal -->
+
+<div class="modal fade" id="basicModal4" tabindex="-1" role="dialog" aria-labelledby="basicModal4" aria-hidden="true">
+  <div class="modal-dialog">   <!--to make box-->
+    <div class="modal-content"> <!--to make shadow-->
+      <div class="modal-header"> <!--to center content in the box-->
+          <div class="modal-body">  
+            <div class="container-fluid">
+              <div class="centered col-lg-12">
+                <div class="pin-wide">
+              <div class="row">
+                <div class="col-md-6">
+                  <h3 id="name4"></h3>
+                  <div id="image4"></div>
+                   <h4 id="market4"></h4>
+                </div>
+                <div class="col-md-6"> 
+                  <!--<div class="row">
+                    <div class="col-md-12">
+                      <h3>Quaddra Software</h3>
+                    </div>
+                  </div>-->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>Amount funded</em></small></h2>
+                      <h2><div class="text-center"id="funding4"></div></h2>
+                      <!--<h2>1.5M</h2>-->
+                    </div>
+                  </div>   
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>AngelList Score</em></small></h2>
+                      <h2><div class="text-center"id="score4"></div></h2>
+
+                      <!--<p class="text-center"><h2 id="score4">+/10+</h2></p>-->
+                    </div>
+                  </div>    
+                </div>
+              </div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <h4>Investors: </h4>
+              </div>
+            </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /.modal -->
+
+<div class="modal fade" id="basicModal5" tabindex="-1" role="dialog" aria-labelledby="basicModal5" aria-hidden="true">
+  <div class="modal-dialog">   <!--to make box-->
+    <div class="modal-content"> <!--to make shadow-->
+      <div class="modal-header"> <!--to center content in the box-->
+          <div class="modal-body">  
+            <div class="container-fluid">
+              <div class="centered col-lg-12">
+                <div class="pin-wide">
+              <div class="row">
+                <div class="col-md-6">
+                  <h3 id="name5"></h3>
+                  <div id="image5"></div>
+                   <h4 id="market5"></h4>
+                </div>
+                <div class="col-md-6"> 
+                  <!--<div class="row">
+                    <div class="col-md-12">
+                      <h3>Quaddra Software</h3>
+                    </div>
+                  </div>-->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>Amount funded</em></small></h2>
+                      <h2><div class="text-center"id="funding5"></div></h2>
+                      <!--<h2>1.5M</h2>-->
+                    </div>
+                  </div>   
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>AngelList Score</em></small></h2>
+                      <h2><div class="text-center"id="score5"></div></h2>
+
+                      <!--<p class="text-center"><h2 id="score4">+/10+</h2></p>-->
+                    </div>
+                  </div>    
+                </div>
+              </div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <h4>Investors: </h4>
+              </div>
+            </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /.modal -->
+
+<div class="modal fade" id="basicModal6" tabindex="-1" role="dialog" aria-labelledby="basicModal6" aria-hidden="true">
+  <div class="modal-dialog">   <!--to make box-->
+    <div class="modal-content"> <!--to make shadow-->
+      <div class="modal-header"> <!--to center content in the box-->
+          <div class="modal-body">  
+            <div class="container-fluid">
+              <div class="centered col-lg-12">
+                <div class="pin-wide">
+              <div class="row">
+                <div class="col-md-6">
+                  <h3 id="name6"></h3>
+                  <div id="image6"></div>
+                   <h4 id="market6"></h4>
+                </div>
+                <div class="col-md-6"> 
+                  <!--<div class="row">
+                    <div class="col-md-12">
+                      <h3>Quaddra Software</h3>
+                    </div>
+                  </div>-->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>Amount funded</em></small></h2>
+                      <h2><div class="text-center"id="funding6"></div></h2>
+                      <!--<h2>1.5M</h2>-->
+                    </div>
+                  </div>   
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>AngelList Score</em></small></h2>
+                      <h2><div class="text-center"id="score6"></div></h2>
+
+                      <!--<p class="text-center"><h2 id="score4">+/10+</h2></p>-->
+                    </div>
+                  </div>    
+                </div>
+              </div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <h4>Investors: </h4>
+              </div>
+            </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /.modal -->
+
+<div class="modal fade" id="basicModal7" tabindex="-1" role="dialog" aria-labelledby="basicModal7" aria-hidden="true">
+  <div class="modal-dialog">   <!--to make box-->
+    <div class="modal-content"> <!--to make shadow-->
+      <div class="modal-header"> <!--to center content in the box-->
+          <div class="modal-body">  
+            <div class="container-fluid">
+              <div class="centered col-lg-12">
+                <div class="pin-wide">
+              <div class="row">
+                <div class="col-md-6">
+                  <h3 id="name7"></h3>
+                  <div id="image7"></div>
+                   <h4 id="market7"></h4>
+                </div>
+                <div class="col-md-6"> 
+                  <!--<div class="row">
+                    <div class="col-md-12">
+                      <h3>Quaddra Software</h3>
+                    </div>
+                  </div>-->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>Amount funded</em></small></h2>
+                      <h2><div class="text-center"id="funding7"></div></h2>
+                      <!--<h2>1.5M</h2>-->
+                    </div>
+                  </div>   
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>AngelList Score</em></small></h2>
+                      <h2><div class="text-center"id="score7"></div></h2>
+
+                      <!--<p class="text-center"><h2 id="score4">+/10+</h2></p>-->
+                    </div>
+                  </div>    
+                </div>
+              </div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <h4>Investors: </h4>
+              </div>
+            </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /.modal -->
+
+<div class="modal fade" id="basicModal8" tabindex="-1" role="dialog" aria-labelledby="basicModal8" aria-hidden="true">
+  <div class="modal-dialog">   <!--to make box-->
+    <div class="modal-content"> <!--to make shadow-->
+      <div class="modal-header"> <!--to center content in the box-->
+          <div class="modal-body">  
+            <div class="container-fluid">
+              <div class="centered col-lg-12">
+                <div class="pin-wide">
+              <div class="row">
+                <div class="col-md-6">
+                  <h3 id="name8"></h3>
+                  <div id="image8"></div>
+                   <h4 id="market8"></h4>
+                </div>
+                <div class="col-md-6"> 
+                  <!--<div class="row">
+                    <div class="col-md-12">
+                      <h3>Quaddra Software</h3>
+                    </div>
+                  </div>-->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>Amount funded</em></small></h2>
+                      <h2><div class="text-center"id="funding8"></div></h2>
+                      <!--<h2>1.5M</h2>-->
+                    </div>
+                  </div>   
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>AngelList Score</em></small></h2>
+                      <h2><div class="text-center"id="score8"></div></h2>
+
+                      <!--<p class="text-center"><h2 id="score4">+/10+</h2></p>-->
+                    </div>
+                  </div>    
+                </div>
+              </div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <h4>Investors: </h4>
+              </div>
+            </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /.modal -->
+
+<div class="modal fade" id="basicModal9" tabindex="-1" role="dialog" aria-labelledby="basicModal9" aria-hidden="true">
+  <div class="modal-dialog">   <!--to make box-->
+    <div class="modal-content"> <!--to make shadow-->
+      <div class="modal-header"> <!--to center content in the box-->
+          <div class="modal-body">  
+            <div class="container-fluid">
+              <div class="centered col-lg-12">
+                <div class="pin-wide">
+              <div class="row">
+                <div class="col-md-6">
+                  <h3 id="name9"></h3>
+                  <div id="image9"></div>
+                   <h4 id="market9"></h4>
+                </div>
+                <div class="col-md-6"> 
+                  <!--<div class="row">
+                    <div class="col-md-12">
+                      <h3>Quaddra Software</h3>
+                    </div>
+                  </div>-->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>Amount funded</em></small></h2>
+                      <h2><div class="text-center"id="funding9"></div></h2>
+                      <!--<h2>1.5M</h2>-->
+                    </div>
+                  </div>   
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>AngelList Score</em></small></h2>
+                      <h2><div class="text-center"id="score9"></div></h2>
+
+                      <!--<p class="text-center"><h2 id="score4">+/10+</h2></p>-->
+                    </div>
+                  </div>    
+                </div>
+              </div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <h4>Investors: </h4>
+              </div>
+            </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /.modal -->
+
+<div class="modal fade" id="basicModal10" tabindex="-1" role="dialog" aria-labelledby="basicModal10" aria-hidden="true">
+  <div class="modal-dialog">   <!--to make box-->
+    <div class="modal-content"> <!--to make shadow-->
+      <div class="modal-header"> <!--to center content in the box-->
+          <div class="modal-body">  
+            <div class="container-fluid">
+              <div class="centered col-lg-12">
+                <div class="pin-wide">
+              <div class="row">
+                <div class="col-md-6">
+                  <h3 id="name10"></h3>
+                  <div id="image10"></div>
+                   <h4 id="market10"></h4>
+                </div>
+                <div class="col-md-6"> 
+                  <!--<div class="row">
+                    <div class="col-md-12">
+                      <h3>Quaddra Software</h3>
+                    </div>
+                  </div>-->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>Amount funded</em></small></h2>
+                      <h2><div class="text-center"id="funding10"></div></h2>
+                      <!--<h2>1.5M</h2>-->
+                    </div>
+                  </div>   
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>AngelList Score</em></small></h2>
+                      <h2><div class="text-center"id="score10"></div></h2>
+
+                      <!--<p class="text-center"><h2 id="score4">+/10+</h2></p>-->
+                    </div>
+                  </div>    
+                </div>
+              </div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <h4>Investors: </h4>
+              </div>
+            </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /.modal -->
+
+  <div class="row">
+
+  <div class="row">
+  <div class="span9 offset2">
+    <div class="well">
+      <center><a href="/"><h1 class="splash">VentureNetwork</h1></a>
+      <h2><small>Recommend the best startup for you</small></h2>
+      <br><br>
+      <input style="width: 400px; height:50px; font-size:25px;" 
+      id="investorID" type="text" placeholder="Your name or your firm's name"></input>
+      <button style="font-size:25px; height:50px;" onclick="someFunc();">Recommend!</button>
+    </center>
+</div>
+
+<div class="well" id="myContainer" style="display:none;">
+  <table class="table table-striped" id="myTable">
+        <thead>
+          <tr> <td><div class="center-block"><div class="text-center"><h3>Ranking score</h3></div></div></td> <td><div class="text-center"><h3>Company</h3></div></td> <td><div class="text-center"></div></td> <td><div class="text-left"><h3>Market</h3></div></td> </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="text-center"><h3>1</h3></div></td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>  
+          </tr>
+          <tr>
+            <td><div class="text-center"><h3>2</h3></div></td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>  
+          </tr>
+          <tr>
+            <td><div class="text-center"><h3>3</h3></div></td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>  
+          </tr>
+          <tr>
+            <td><div class="text-center"><h3>4</h3></div></td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>  
+          </tr>
+          <tr>
+            <td><div class="text-center"><h3>5</h3></div></td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>  
+          </tr>
+          <tr>
+            <td><div class="text-center"><h3>6</h3></div></td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>  
+          </tr>
+          <tr>
+            <td><div class="text-center"><h3>7</h3></div></td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>  
+          </tr>
+          <tr>
+            <td><div class="text-center"><h3>8</h3></div></td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>  
+          </tr>
+          <tr>
+            <td><div class="text-center"><h3>9</h3></div></td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>  
+          </tr>
+          <tr>
+            <td><div class="text-center"><h3>10</h3></div></td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>  
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </div>
+</div>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../static/bootstrap-3.1.1/js/bootstrap.min.js"></script>
+{% endblock %}
+
+

@@ -1,0 +1,42 @@
+@font-face {
+font-family: Pacifico;
+src: url('../designer_shit/fonts/Pacifico.ttf');
+font-family: Walkway SemiBold;
+src: url('../designer_shit/fonts/Walkway SemiBold.ttf');
+    
+}
+html {
+	
+	background-color: #f0cd0b;
+}
+
+#images {
+float:center;
+text-align:center;
+padding:5px;
+
+}
+
+#space {
+padding-left:40px;
+padding-right:40px;
+
+}
+
+h1 {
+font-size:50px;
+padding:0px;
+text-align:center;
+font-weight: bold;
+font-family:"Freeroad";
+
+}
+
+p {
+font-size:20px;
+padding:0px;
+text-align:center;
+font-weight: bold;
+font-family:"Freeroad";
+
+}

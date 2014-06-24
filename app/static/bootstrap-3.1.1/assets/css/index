@@ -1,0 +1,90 @@
+@font-face {
+font-family: Pacifico;
+src: url('../designer_shit/fonts/Pacifico.ttf');
+font-family: Walkway SemiBold;
+src: url('../designer_shit/fonts/Walkway SemiBold.ttf');
+    
+}
+body {
+	background-image: url("../designer_shit/back.png");
+	background-repeat: repeat-x;
+	background-attachment:fixed;
+	background-position: center;
+}
+
+.register-block {
+	background-color: white;
+	padding:5% 1% 1% 1%;
+
+	
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+
+	background-image: -webkit-gradient(
+	linear,
+	left top,
+	left bottom,
+	color-stop(0%, white),
+	color-stop(100%, #DDD)
+	);
+}
+
+
+.register-block .form-horizontal, .register-block .control-group,.register-block .control-label, .register-block .btn {
+	font-family: "Walkway SemiBold";
+	-webkit-font-smoothing: antialiased;
+	letter-spacing: 1px;
+	text-transform: lowercase;
+	font-size: 1.2em;
+	margin: 2px;
+}
+
+
+#motto {
+	-webkit-font-smoothing: antialiased;
+	text-align: right;
+	font-family: "Walkway SemiBold";
+	letter-spacing: 1px;
+	text-transform: lowercase;
+	font-size: 2.2em ;
+	font-weight: bold;
+	color: white;
+	line-height: 1.2em;
+}
+
+#motto div:last-child {
+
+	line-height: 2.2em; 
+
+}
+
+#login-wrapper {
+	position: static;
+	margin-top: 15%;
+}
+
+#eat-button {
+	width: 100%;
+	font-family: "Walkway UltraBold";
+	letter-spacing: 2.5px;
+	font-size: 2em;
+}
+
+#sign-up div{
+	
+	display: inline;
+	margin-left: 15%;
+	padding-right: 5%;
+}
+
+#new-user{
+	text-align: center;
+	text-transform: lowercase;
+}
+
+#new-user a:hover {
+	text-decoration: none;
+
+
+}
