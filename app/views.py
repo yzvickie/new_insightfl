@@ -39,7 +39,7 @@ def users(investorID):
         Statement = '''SELECT startup_name, startup_market, logolink, startupSignal, angellink, funding FROM Starup_info WHERE startupID="%s";'''% row[1]
         cur.execute(Statement)
         tmp = cur.fetchall()
-        Statement2 = '''SELECT investor_id FROM investor_comp WHERE startupID="%s";'''% row[1]
+        Statement2 = '''SELECT investor_id FROM Investor_comp WHERE startupID="%s";'''% row[1]
         cur.execute(Statement2)
         siminvestor_id = cur.fetchall()
         siminvestor = []
