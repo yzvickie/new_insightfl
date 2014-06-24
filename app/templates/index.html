@@ -1,0 +1,33 @@
+
+
+<html>
+<head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script>
+<form class="form-search" action="search.html" method="GET">
+var fetchData = function() {
+	
+
+	
+	function success(responseData) {
+		console.log(responseData);
+		$('#output').text(responseData);
+
+		
+	};	
+	$.get('/api/users/' + $('#dayInput').val(), success);
+};
+</script>
+</head>
+
+<body>
+Which Day? 
+<input id="dayInput" type="text"></input>
+<button onclick="fetchData();">Search This</button>
+<div id="output"></div>
+
+
+
+</body>
+
+</html>
