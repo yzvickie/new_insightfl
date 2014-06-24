@@ -30,7 +30,7 @@ def find_companies(investorname):
         score.append({u'similarity': cosine_similarity(target,row).tolist()[0][0], u'investor_id': investor_id[counter2]})
         counter2 += 1
     #score = sorted(score,reverse=True)
-    con = pymysql.connect(host='localhost', user='root', passwd='****')
+    con = pymysql.connect(host='localhost', user='root', passwd='1234')
     cur = con.cursor()
     cur.execute('''USE Venturenetwork16;''')
     current_query='''SELECT startupID FROM Investor_comp'''
