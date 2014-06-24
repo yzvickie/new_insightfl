@@ -1,0 +1,233 @@
+{% extends "base.html" %}
+
+{% block css %}
+.text-center {
+    text-align: center !important;
+}
+{% endblock %}
+
+{% block content %}
+
+<br>
+ <script>
+   var fetchData = function() {
+    function success(responseData) {
+    var mydata = JSON.parse(responseData)
+
+    console.log(mydata);
+    console.log(mydata.length)
+    var myTable = document.getElementById('myTable');
+    for (i=0; i < 10; i++) {
+    	myTable.rows[i+1].cells[1].innerHTML = '<div class="center-block"><a href="#" data-toggle="modal" data-target="#basicModal">'+mydata[i][0]+'</a></div>';
+    	myTable.rows[i+1].cells[2].innerHTML = '<div class="center-block"><img src=' + mydata[i][2] + 'max-width="110px" height="90px" alt="Voluptatem logo" class="img-rounded"></div>';
+    	myTable.rows[i+1].cells[3].innerHTML = mydata[i][1];
+    
+    $('#output4').html('<div class="center-block"><img src=' + mydata[i][2] + 'width="150px" alt="Voluptatem logo"></div>');
+    }
+  };  
+  $.get('/api/users/' + $('#investorID').val(), success);
+};
+ </script>    
+
+<!--
+<a href="#" data-toggle="modal" data-target="#basicModal">Quaddra Software</a>-->
+
+ <div class="modal fade" id="basicModal" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+  <div class="modal-dialog">   <!--to make box-->
+    <div class="modal-content"> <!--to make shadow-->
+      <div class="modal-header"> <!--to center content in the box-->
+          <div class="modal-body">  
+            <div class="container-fluid">
+              <div class="centered col-lg-12">
+                <div class="pin-wide">
+              <div class="row">
+                <div class="col-md-6">
+                	<h3>Quaddra Software</h3>
+                  <div id="output4"></div>
+                  <h3>SaaS </h3>
+                </div>
+                <div class="col-md-6"> 
+                  <!--<div class="row">
+                    <div class="col-md-12">
+                      <h3>Quaddra Software</h3>
+                    </div>
+                  </div>-->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>Amount funded</em></small></h2>
+                      <h2><p class="text-center">1.4M</p></h2>
+                    </div>
+                  </div>   
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>AngelList Score</em></small></h2>
+                      <h2><p class="text-center">9/10</p></h2>
+                    </div>
+                  </div>    
+                </div>
+              </div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <h4>Investors: </h4>
+              </div>
+            </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /.modal -->
+
+<div class="row">
+	<div class="span8 offset2">
+  		<div class="well">
+
+			<center><h1>Recommend the best startup for you</h1>
+
+			<br><br>
+
+				<input style="width: 400px; height:50px; font-size:25px;" 
+            id="investorID" type="text" placeholder="Your name or your firm's name"></input>
+            <button style="font-size:25px; height:50px;" onclick="fetchData();">Recommend!</button>
+            <div id="output"></div>
+
+			</center>
+		</div>
+		
+
+		<div class="well">
+			<h4>We recommend high potential startups based on your portfolio</h4>
+			<h5>Trending startups</h5>
+			<!--<table  id="myTable" class="table well">-->
+			<table class="table table-hover" id="myTable">
+				<thead>
+					<tr> <td><div class="center-block"><div class="text-center">Ranking</div></div></td> <td><div class="text-center">Company</div></td> <td><div class="text-center"></div></td> <td><div class="text-center">Category</div></td> </tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><div class="text-center"><h1>1</h1></div></td>
+						<td><div class = 'text-center'><h4>Voluptatem</h4></div></td>
+						<td>
+							<div class="img">
+								<img src="https://s3.amazonaws.com/photos.angel.co/startups/i/404435-52ebf2c0c8e6bcffe72344d6c56310e5-medium_jpg.jpg?buster=1401213402"  width="110" height="90" alt="Voluptatem logo">
+							</div>
+						</td>
+						<td><h4>Financial Services</h4></td>	
+					</tr>
+
+				
+					<tr>
+						<td><div class="text-center"><h1>2</h1></div></td>
+						<td><div class="text-center"><h4>Quaddra Software</h4></div></td>
+						<td>
+							<div class="img">
+								<img src="https://s3.amazonaws.com/photos.angel.co/startups/i/362888-3a70d5f77d0f7385932d0d2869e5b70b-medium_jpg.jpg?buster=1395178810" width="110" height="90" alt="Quaddra Software logo">
+							</div>
+						</td>
+						<td><h4>Enterprise Software</h4></td>	
+					</tr>
+					<tr>
+						<td><div class="text-center"><h1>3</h1></div></td>
+						<td><div class = 'text-center'><h4>Blinkfire Analytics</h4></div></td>
+						<td>
+							<div class="img">
+								<img src="https://s3.amazonaws.com/photos.angel.co/startups/i/214812-ce2072ca2b3c04e8f6962c846587e124-medium_jpg.jpg?buster=1370013644" width="110" height="90" alt="Blinkfire Analytics logo"> 
+							</div>
+						</td>
+						<td><h4>Social Media</h4></td>	
+					</tr>
+
+					<tr>
+						<td><div class="text-center"><h1>4</h1></div></td>
+						<td><div class = 'text-center'><h4>sendwithus</h4></div></td>
+						<td>
+							<div class="img">
+								<img src="https://s3.amazonaws.com/photos.angel.co/startups/i/145246-068b77565e5bd7136b0c50296b5b138c-medium_jpg.jpg?buster=1358891890" width="110" height="90" alt="sendwithus logo" >
+							</div>
+						</td>
+						<td><h4>SaaS</h4></td>	
+					</tr> 
+					</tr>
+					<tr>
+						<td><div class="text-center"><h1>5</h1></div></td>
+						<td><div class = 'text-center'><h4>Voluptatem</h4></div></td>
+						<td>
+							<div class="img">
+								<img src="https://s3.amazonaws.com/photos.angel.co/startups/i/404435-52ebf2c0c8e6bcffe72344d6c56310e5-medium_jpg.jpg?buster=1401213402"  width="110" height="90" alt="Voluptatem logo">
+							</div>
+						</td>
+						<td><h4>Financial Services</h4></td>	
+					</tr>
+
+				
+					<tr>
+						<td><div class="text-center"><h1>6</h1></div></td>
+						<td><div class="text-center"><h4>Quaddra Software</h4></div></td>
+						<td>
+							<div class="img">
+								<img src="https://s3.amazonaws.com/photos.angel.co/startups/i/362888-3a70d5f77d0f7385932d0d2869e5b70b-medium_jpg.jpg?buster=1395178810" width="110" height="90" alt="Quaddra Software logo">
+							</div>
+						</td>
+						<td><h4>Enterprise Software222</h4></td>
+					</tr>
+					<tr>
+						<td><div class="text-center"><h1>7</h1></div></td>
+						<td><div class = 'text-center'><h4>Blinkfire Analytics</h4></div></td>
+						<td>
+							<div class="img">
+								<img src="https://s3.amazonaws.com/photos.angel.co/startups/i/214812-ce2072ca2b3c04e8f6962c846587e124-medium_jpg.jpg?buster=1370013644" width="110" height="90" alt="Blinkfire Analytics logo"> 
+							</div>
+						</td>
+						<td><h4>Social Media</h4></td>	
+					</tr>
+
+					<tr>
+						<td><div class="text-center"><h1>8</h1></div></td>
+						<td><div class = 'text-center'><h4>sendwithus</h4></div></td>
+						<td>
+							<div class="img">
+								<img src="https://s3.amazonaws.com/photos.angel.co/startups/i/145246-068b77565e5bd7136b0c50296b5b138c-medium_jpg.jpg?buster=1358891890" width="110" height="90" alt="sendwithus logo" >
+							</div>
+						</td>
+						<td><h4>SaaS</h4></td>	
+					</tr>
+					<tr>
+						<td><div class="text-center"><h1>9</h1></div></td>
+						<td><div class = 'text-center'><h4>Blinkfire Analytics</h4></div></td>
+						<td>
+							<div class="img">
+								<img src="https://s3.amazonaws.com/photos.angel.co/startups/i/214812-ce2072ca2b3c04e8f6962c846587e124-medium_jpg.jpg?buster=1370013644" width="110" height="90" alt="Blinkfire Analytics logo"> 
+							</div>
+						</td>
+						<td><h4>Social Media</h4></td>	
+					</tr>
+
+					<tr>
+						<td><div class="text-center"><h1>10</h1></div></td>
+						<td><div class = 'text-center'><h4>sendwithus</h4></div></td>
+						<td>
+							<div class="img">
+								<img src="https://s3.amazonaws.com/photos.angel.co/startups/i/145246-068b77565e5bd7136b0c50296b5b138c-medium_jpg.jpg?buster=1358891890" width="110" height="90" alt="sendwithus logo" >
+							</div>
+						</td>
+						<td><h4>SaaS</h4></td>
+					</tr> 
+				</tbody>
+			</table>
+
+			
+		</div>
+	</div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="../static/bootstrap-3.1.1/js/bootstrap.min.js"></script>
+{% endblock %}
