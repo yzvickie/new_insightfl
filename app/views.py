@@ -9,8 +9,6 @@ import re
 from find_similarity3 import find_companies
 from operator import itemgetter
 
-conn = con_db("localhost", 3306, "root", "****", "Venturenetwork18")
-
 
 
 # ROUTING/VIEW FUNCTIONS
@@ -31,6 +29,7 @@ def index():
     
 @app.route('/api/users/<investorname>')  #this seems to work
 def users(investorname):
+    conn = con_db("localhost", 3306, "root", "****", "Venturenetwork18")
     cur = conn.cursor()
     find_investorID = '''SELECT investor_id FROM Investors_info WHERE investor_name="%s";'''% investorname
     cur.execute(find_investorID)
