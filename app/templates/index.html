@@ -1,0 +1,883 @@
+{% extends "base.html" %}
+
+{% block css %}
+.text-center {
+    text-align: center !important;
+}
+{% endblock %}
+
+{% block content %}
+
+<br>
+<script>
+   var fetchData = function() {
+    function success(responseData) {
+    var mydata = JSON.parse(responseData)
+    console.log(mydata);
+    //console.log(mydata.length)
+    //console.log(mydata[0]['investors'][0]['investor_name'])
+    var myTable = document.getElementById('myTable');
+    //for (i=0; i < mydata.length; i++) {
+    
+    for (i=0; i < 10; i++) {
+      //console.log(mydata[i]['startup_name'])
+      investor_length = 5;
+      if (mydata[i]['investors'].length < 5) {
+        investor_length = mydata[i]['investors'].length;
+      }
+      //console.log(investor_length)
+      var target = '#basicModal'+(i+1);
+      myTable.rows[i+1].cells[1].innerHTML = '<div class="center-block"><a href="#" data-toggle="modal" data-target='+target+'><h4>'+mydata[i]['startup_name']+'</h4></a></div>';
+      //myTable.rows[i+1].cells[2].innerHTML = '<div class="center-block"><img src=' + mydata[i][2] + 'max-width="110px" height="90px" alt="Voluptatem logo"></div>';
+      //myTable.rows[i+1].cells[2].innerHTML = '<div class="center-block"><img src=' + mydata[i][2] + ' height="45px" alt="Voluptatem logo"></div>';
+      myTable.rows[i+1].cells[2].innerHTML = '<div class="center-block"><img src=' + mydata[i]['logolink'] + ' height="50px" alt="Voluptatem logo" class="img-rounded"></div>';
+      myTable.rows[i+1].cells[3].innerHTML = '<div class="center-block"><h4>' + mydata[i]['startup_market']  +' </h4></div>';
+    
+    var image = '#image'+(i+1);
+    $(image).html('<div class="center-block"><img src=' + mydata[i]['logolink'] + ' width="150px" height="100px" alt="Voluptatem logo"></div>')
+    
+    var name = '#name'+(i+1);
+    var startupName = mydata[i]['startup_name'];
+    $(name).text(startupName);
+
+     var founder = '#founder'+(i+1);
+    $(founder).text(mydata[i]['founder'])
+
+     var score = '#score'+(i+1);
+    $(score).text(mydata[i]['startupSignal']+'/10')
+
+     var funding = '#funding'+(i+1);
+    $(funding).text(mydata[i]['funding'])
+
+    var angellink = '#angellink'+(i+1);
+    var linkHref = mydata[i]['angellink'];
+    $(angellink).text(startupName).attr("href", linkHref);
+    
+    var investors = '#investors'+(i+1);
+    var tmp = '';
+    for (j=0; j<investor_length; j++){
+      tmp = tmp + ', '+mydata[i]['investors'][j]['investor_name'];
+      } 
+    tmp = tmp.substring(1)
+    $(investors).text(tmp)
+    }
+
+  };  
+  $.get('/api/users/' + $('#investorname').val(), success);
+};
+ </script>    
+ <script type="text/javascript">
+function setContainer(what){
+if(document.getElementById(what).style.display=="none"){
+document.getElementById(what).style.display="block";
+}
+else if(document.getElementById(what).style.display=="block"){
+document.getElementById(what).style.display="block";
+}
+}
+</script>
+
+ <script>
+  $(function() {
+      $("#investorname" ).autocomplete("../static/Output.txt")
+  });
+  </script>
+
+<script>
+ function someFunc() {
+    fetchData();
+    setContainer('myContainer');
+  
+}
+</script> 
+<!--<a href="#" data-toggle="modal" data-target="#basicModal"><h1 id="output1"></h1></a>-->
+
+
+
+
+<div class="modal fade" id="basicModal1" tabindex="-1" role="dialog" aria-labelledby="basicModal1" aria-hidden="true">
+  <div class="modal-dialog">   <!--to make box-->
+    <div class="modal-content"> <!--to make shadow-->
+      <div class="modal-header"> <!--to center content in the box-->
+          <div class="modal-body">  
+            <div class="container-fluid">
+              <div class="centered col-lg-12">
+                <div class="pin-wide">
+              <div class="row">
+                <div class="col-md-6">
+
+                  <h1> <a id="angellink1" target="_blank"></a> </h1>
+                  <br>
+                  <!-- <a id"angellink1" target="_blank">hi</a> -->
+                  <!--<a href= div id="angellink1" target="_blank"><h1>Visit W3Schools.com!</h1></a> 
+                  a href="#" data-toggle="modal" 
+                <a id="tips">
+                <a href="#tips">-->
+                  <div id="image1"></div>
+                  <br>
+                  <span class="small1_font">Founders: </span>  
+                   <span class="small1_font" id="founder1"></span>
+                </div>
+                <div class="col-md-6"> 
+                  <!--<div class="row">
+                    <div class="col-md-12">
+                      <h3>Quaddra Software</h3>
+                    </div>
+                  </div>-->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>Amount funded</em></small></h2>
+                      <h2><div class="text-center"id="funding1"></div></h2>
+                      <!--<h2>1.5M</h2>-->
+                    </div>
+                  </div>   
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>AngelList Score</em></small></h2>
+                      <h2><div class="text-center"id="score1"></div></h2>
+
+                      <!--<p class="text-center"><h2 id="score4">+/10+</h2></p>-->
+                    </div>
+                  </div>    
+                </div>
+              </div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <!--<h3> Investors: </h3><h4 class="text-left"id="investors1"></h4><h3> and more! </h3>-->
+                <br><br>
+                <span class="large_font">Investors: </span>  
+                <span class="small1_font"id="investors1"></span>     
+                <span class="small1_font"> and more!</span>  
+              </div>
+            </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /.modal -->
+
+<div class="modal fade" id="basicModal2" tabindex="-1" role="dialog" aria-labelledby="basicModal2" aria-hidden="true">
+  <div class="modal-dialog">   <!--to make box-->
+    <div class="modal-content"> <!--to make shadow-->
+      <div class="modal-header"> <!--to center content in the box-->
+          <div class="modal-body">  
+            <div class="container-fluid">
+              <div class="centered col-lg-12">
+                <div class="pin-wide">
+              <div class="row">
+                <div class="col-md-6">
+
+                  <h1> <a id="angellink2" target="_blank"></a> </h1>
+                  <br>
+                  <!-- <a id"angellink1" target="_blank">hi</a> -->
+                  <!--<a href= div id="angellink1" target="_blank"><h1>Visit W3Schools.com!</h1></a> 
+                  a href="#" data-toggle="modal" 
+                <a id="tips">
+                <a href="#tips">-->
+                  <div id="image2"></div>
+                  <br>
+                  <span class="small1_font">Founders: </span>  
+                   <span class="small1_font" id="founder2"></span>
+                </div>
+                <div class="col-md-6"> 
+                  <!--<div class="row">
+                    <div class="col-md-12">
+                      <h3>Quaddra Software</h3>
+                    </div>
+                  </div>-->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>Amount funded</em></small></h2>
+                      <h2><div class="text-center"id="funding2"></div></h2>
+                      <!--<h2>1.5M</h2>-->
+                    </div>
+                  </div>   
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>AngelList Score</em></small></h2>
+                      <h2><div class="text-center"id="score2"></div></h2>
+
+                      <!--<p class="text-center"><h2 id="score4">+/10+</h2></p>-->
+                    </div>
+                  </div>    
+                </div>
+              </div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <!--<h3> Investors: </h3><h4 class="text-left"id="investors1"></h4><h3> and more! </h3>-->
+                <br><br>
+                <span class="large_font">Investors: </span>  
+                <span class="small1_font"id="investors2"></span>     
+                <span class="small1_font"> and more!</span>  
+              </div>
+            </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /.modal -->
+
+<div class="modal fade" id="basicModal3" tabindex="-1" role="dialog" aria-labelledby="basicModal3" aria-hidden="true">
+  <div class="modal-dialog">   <!--to make box-->
+    <div class="modal-content"> <!--to make shadow-->
+      <div class="modal-header"> <!--to center content in the box-->
+          <div class="modal-body">  
+            <div class="container-fluid">
+              <div class="centered col-lg-12">
+                <div class="pin-wide">
+              <div class="row">
+                <div class="col-md-6">
+
+                  <h1> <a id="angellink3" target="_blank"></a> </h1>
+                  <br>
+                  <!-- <a id"angellink1" target="_blank">hi</a> -->
+                  <!--<a href= div id="angellink1" target="_blank"><h1>Visit W3Schools.com!</h1></a> 
+                  a href="#" data-toggle="modal" 
+                <a id="tips">
+                <a href="#tips">-->
+                  <div id="image3"></div>
+                  <br>
+                  <span class="small1_font">Founders: </span>  
+                   <span class="small1_font" id="founder3"></span>
+                </div>
+                <div class="col-md-6"> 
+                  <!--<div class="row">
+                    <div class="col-md-12">
+                      <h3>Quaddra Software</h3>
+                    </div>
+                  </div>-->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>Amount funded</em></small></h2>
+                      <h2><div class="text-center"id="funding3"></div></h2>
+                      <!--<h2>1.5M</h2>-->
+                    </div>
+                  </div>   
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>AngelList Score</em></small></h2>
+                      <h2><div class="text-center"id="score3"></div></h2>
+
+                      <!--<p class="text-center"><h2 id="score4">+/10+</h2></p>-->
+                    </div>
+                  </div>    
+                </div>
+              </div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <!--<h3> Investors: </h3><h4 class="text-left"id="investors1"></h4><h3> and more! </h3>-->
+                <br><br>
+                <span class="large_font">Investors: </span>  
+                <span class="small1_font"id="investors3"></span>     
+                <span class="small1_font"> and more!</span>  
+              </div>
+            </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /.modal -->
+
+<div class="modal fade" id="basicModal4" tabindex="-1" role="dialog" aria-labelledby="basicModal4" aria-hidden="true">
+  <div class="modal-dialog">   <!--to make box-->
+    <div class="modal-content"> <!--to make shadow-->
+      <div class="modal-header"> <!--to center content in the box-->
+          <div class="modal-body">  
+            <div class="container-fluid">
+              <div class="centered col-lg-12">
+                <div class="pin-wide">
+              <div class="row">
+                <div class="col-md-6">
+
+                  <h1> <a id="angellink4" target="_blank"></a> </h1>
+                  <br>
+                  <!-- <a id"angellink1" target="_blank">hi</a> -->
+                  <!--<a href= div id="angellink1" target="_blank"><h1>Visit W3Schools.com!</h1></a> 
+                  a href="#" data-toggle="modal" 
+                <a id="tips">
+                <a href="#tips">-->
+                  <div id="image4"></div>
+                  <br>
+                  <span class="small1_font">Founders: </span>  
+                   <span class="small1_font" id="founder4"></span>
+                </div>
+                <div class="col-md-6"> 
+                  <!--<div class="row">
+                    <div class="col-md-12">
+                      <h3>Quaddra Software</h3>
+                    </div>
+                  </div>-->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>Amount funded</em></small></h2>
+                      <h2><div class="text-center"id="funding4"></div></h2>
+                      <!--<h2>1.5M</h2>-->
+                    </div>
+                  </div>   
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>AngelList Score</em></small></h2>
+                      <h2><div class="text-center"id="score4"></div></h2>
+
+                      <!--<p class="text-center"><h2 id="score4">+/10+</h2></p>-->
+                    </div>
+                  </div>    
+                </div>
+              </div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <!--<h3> Investors: </h3><h4 class="text-left"id="investors1"></h4><h3> and more! </h3>-->
+                <br><br>
+                <span class="large_font">Investors: </span>  
+                <span class="small1_font"id="investors4"></span>     
+                <span class="small1_font"> and more!</span>  
+              </div>
+            </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /.modal -->
+
+<div class="modal fade" id="basicModal5" tabindex="-1" role="dialog" aria-labelledby="basicModal5" aria-hidden="true">
+  <div class="modal-dialog">   <!--to make box-->
+    <div class="modal-content"> <!--to make shadow-->
+      <div class="modal-header"> <!--to center content in the box-->
+          <div class="modal-body">  
+            <div class="container-fluid">
+              <div class="centered col-lg-12">
+                <div class="pin-wide">
+              <div class="row">
+                <div class="col-md-6">
+
+                  <h1> <a id="angellink5" target="_blank"></a> </h1>
+                  <br>
+                  <!-- <a id"angellink1" target="_blank">hi</a> -->
+                  <!--<a href= div id="angellink1" target="_blank"><h1>Visit W3Schools.com!</h1></a> 
+                  a href="#" data-toggle="modal" 
+                <a id="tips">
+                <a href="#tips">-->
+                  <div id="image5"></div>
+                  <br>
+                  <span class="small1_font">Founders: </span>  
+                   <span class="small1_font" id="founder5"></span>
+                </div>
+                <div class="col-md-6"> 
+                  <!--<div class="row">
+                    <div class="col-md-12">
+                      <h3>Quaddra Software</h3>
+                    </div>
+                  </div>-->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>Amount funded</em></small></h2>
+                      <h2><div class="text-center"id="funding5"></div></h2>
+                      <!--<h2>1.5M</h2>-->
+                    </div>
+                  </div>   
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>AngelList Score</em></small></h2>
+                      <h2><div class="text-center"id="score5"></div></h2>
+
+                      <!--<p class="text-center"><h2 id="score4">+/10+</h2></p>-->
+                    </div>
+                  </div>    
+                </div>
+              </div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <!--<h3> Investors: </h3><h4 class="text-left"id="investors1"></h4><h3> and more! </h3>-->
+                <br><br>
+                <span class="large_font">Investors: </span>  
+                <span class="small1_font"id="investors5"></span>     
+                <span class="small1_font"> and more!</span>  
+              </div>
+            </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /.modal -->
+
+<div class="modal fade" id="basicModal6" tabindex="-1" role="dialog" aria-labelledby="basicModal6" aria-hidden="true">
+  <div class="modal-dialog">   <!--to make box-->
+    <div class="modal-content"> <!--to make shadow-->
+      <div class="modal-header"> <!--to center content in the box-->
+          <div class="modal-body">  
+            <div class="container-fluid">
+              <div class="centered col-lg-12">
+                <div class="pin-wide">
+              <div class="row">
+                <div class="col-md-6">
+
+                  <h1> <a id="angellink6" target="_blank"></a> </h1>
+                  <br>
+                  <!-- <a id"angellink1" target="_blank">hi</a> -->
+                  <!--<a href= div id="angellink1" target="_blank"><h1>Visit W3Schools.com!</h1></a> 
+                  a href="#" data-toggle="modal" 
+                <a id="tips">
+                <a href="#tips">-->
+                  <div id="image6"></div>
+                  <br>
+                  <span class="small1_font">Founders: </span>  
+                   <span class="small1_font" id="founder6"></span>
+                </div>
+                <div class="col-md-6"> 
+                  <!--<div class="row">
+                    <div class="col-md-12">
+                      <h3>Quaddra Software</h3>
+                    </div>
+                  </div>-->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>Amount funded</em></small></h2>
+                      <h2><div class="text-center"id="funding6"></div></h2>
+                      <!--<h2>1.5M</h2>-->
+                    </div>
+                  </div>   
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>AngelList Score</em></small></h2>
+                      <h2><div class="text-center"id="score6"></div></h2>
+
+                      <!--<p class="text-center"><h2 id="score4">+/10+</h2></p>-->
+                    </div>
+                  </div>    
+                </div>
+              </div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <!--<h3> Investors: </h3><h4 class="text-left"id="investors1"></h4><h3> and more! </h3>-->
+                <br><br>
+                <span class="large_font">Investors: </span>  
+                <span class="small1_font"id="investors6"></span>     
+                <span class="small1_font"> and more!</span>  
+              </div>
+            </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /.modal -->
+
+<div class="modal fade" id="basicModal7" tabindex="-1" role="dialog" aria-labelledby="basicModal7" aria-hidden="true">
+  <div class="modal-dialog">   <!--to make box-->
+    <div class="modal-content"> <!--to make shadow-->
+      <div class="modal-header"> <!--to center content in the box-->
+          <div class="modal-body">  
+            <div class="container-fluid">
+              <div class="centered col-lg-12">
+                <div class="pin-wide">
+              <div class="row">
+                <div class="col-md-6">
+
+                  <h1> <a id="angellink7" target="_blank"></a> </h1>
+                  <br>
+                  <!-- <a id"angellink1" target="_blank">hi</a> -->
+                  <!--<a href= div id="angellink1" target="_blank"><h1>Visit W3Schools.com!</h1></a> 
+                  a href="#" data-toggle="modal" 
+                <a id="tips">
+                <a href="#tips">-->
+                  <div id="image7"></div>
+                  <br>
+                  <span class="small1_font">Founders: </span>  
+                   <span class="small1_font" id="founder7"></span>
+                </div>
+                <div class="col-md-6"> 
+                  <!--<div class="row">
+                    <div class="col-md-12">
+                      <h3>Quaddra Software</h3>
+                    </div>
+                  </div>-->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>Amount funded</em></small></h2>
+                      <h2><div class="text-center"id="funding7"></div></h2>
+                      <!--<h2>1.5M</h2>-->
+                    </div>
+                  </div>   
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>AngelList Score</em></small></h2>
+                      <h2><div class="text-center"id="score7"></div></h2>
+
+                      <!--<p class="text-center"><h2 id="score4">+/10+</h2></p>-->
+                    </div>
+                  </div>    
+                </div>
+              </div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <!--<h3> Investors: </h3><h4 class="text-left"id="investors1"></h4><h3> and more! </h3>-->
+                <br><br>
+                <span class="large_font">Investors: </span>  
+                <span class="small1_font"id="investors7"></span>     
+                <span class="small1_font"> and more!</span>  
+              </div>
+            </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /.modal -->
+
+<div class="modal fade" id="basicModal8" tabindex="-1" role="dialog" aria-labelledby="basicModal8" aria-hidden="true">
+  <div class="modal-dialog">   <!--to make box-->
+    <div class="modal-content"> <!--to make shadow-->
+      <div class="modal-header"> <!--to center content in the box-->
+          <div class="modal-body">  
+            <div class="container-fluid">
+              <div class="centered col-lg-12">
+                <div class="pin-wide">
+              <div class="row">
+                <div class="col-md-6">
+
+                  <h1> <a id="angellink8" target="_blank"></a> </h1>
+                  <br>
+                  <!-- <a id"angellink1" target="_blank">hi</a> -->
+                  <!--<a href= div id="angellink1" target="_blank"><h1>Visit W3Schools.com!</h1></a> 
+                  a href="#" data-toggle="modal" 
+                <a id="tips">
+                <a href="#tips">-->
+                  <div id="image8"></div>
+                  <br>
+                  <span class="small1_font">Founders: </span>  
+                   <span class="small1_font" id="founder8"></span>
+                </div>
+                <div class="col-md-6"> 
+                  <!--<div class="row">
+                    <div class="col-md-12">
+                      <h3>Quaddra Software</h3>
+                    </div>
+                  </div>-->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>Amount funded</em></small></h2>
+                      <h2><div class="text-center"id="funding8"></div></h2>
+                      <!--<h2>1.5M</h2>-->
+                    </div>
+                  </div>   
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>AngelList Score</em></small></h2>
+                      <h2><div class="text-center"id="score8"></div></h2>
+
+                      <!--<p class="text-center"><h2 id="score4">+/10+</h2></p>-->
+                    </div>
+                  </div>    
+                </div>
+              </div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <!--<h3> Investors: </h3><h4 class="text-left"id="investors1"></h4><h3> and more! </h3>-->
+                <br><br>
+                <span class="large_font">Investors: </span>  
+                <span class="small1_font"id="investors8"></span>     
+                <span class="small1_font"> and more!</span>  
+              </div>
+            </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /.modal -->
+
+<div class="modal fade" id="basicModal9" tabindex="-1" role="dialog" aria-labelledby="basicModal9" aria-hidden="true">
+  <div class="modal-dialog">   <!--to make box-->
+    <div class="modal-content"> <!--to make shadow-->
+      <div class="modal-header"> <!--to center content in the box-->
+          <div class="modal-body">  
+            <div class="container-fluid">
+              <div class="centered col-lg-12">
+                <div class="pin-wide">
+              <div class="row">
+                <div class="col-md-6">
+
+                  <h1> <a id="angellink9" target="_blank"></a> </h1>
+                  <br>
+                  <!-- <a id"angellink1" target="_blank">hi</a> -->
+                  <!--<a href= div id="angellink1" target="_blank"><h1>Visit W3Schools.com!</h1></a> 
+                  a href="#" data-toggle="modal" 
+                <a id="tips">
+                <a href="#tips">-->
+                  <div id="image9"></div>
+                  <br>
+                  <span class="small1_font">Founders: </span>  
+                   <span class="small1_font" id="founder9"></span>
+                </div>
+                <div class="col-md-6"> 
+                  <!--<div class="row">
+                    <div class="col-md-12">
+                      <h3>Quaddra Software</h3>
+                    </div>
+                  </div>-->
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>Amount funded</em></small></h2>
+                      <h2><div class="text-center"id="funding9"></div></h2>
+                      <!--<h2>1.5M</h2>-->
+                    </div>
+                  </div>   
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>AngelList Score</em></small></h2>
+                      <h2><div class="text-center"id="score9"></div></h2>
+
+                      <!--<p class="text-center"><h2 id="score4">+/10+</h2></p>-->
+                    </div>
+                  </div>    
+                </div>
+              </div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <!--<h3> Investors: </h3><h4 class="text-left"id="investors1"></h4><h3> and more! </h3>-->
+                <br><br>
+                <span class="large_font">Investors: </span>  
+                <span class="small1_font"id="investors9"></span>     
+                <span class="small1_font"> and more!</span>  
+              </div>
+            </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /.modal -->
+
+<div class="modal fade" id="basicModal10" tabindex="-1" role="dialog" aria-labelledby="basicModal10" aria-hidden="true">
+  <div class="modal-dialog">   
+    <div class="modal-content"> 
+      <div class="modal-header"> 
+          <div class="modal-body">  
+            <div class="container-fluid">
+              <div class="centered col-lg-12">
+                <div class="pin-wide">
+              <div class="row">
+                <div class="col-md-6">
+
+                  <h1> <a id="angellink10" target="_blank"></a> </h1>
+                  <br>
+                 
+                  <div id="image10"></div>
+                  <br>
+                  <span class="small1_font">Founders: </span>  
+                   <span class="small1_font" id="founder10"></span>
+                </div>
+                <div class="col-md-6"> 
+                 
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>Amount funded</em></small></h2>
+                      <h2><div class="text-center"id="funding10"></div></h2>
+                   
+                    </div>
+                  </div>   
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h2><small><em>AngelList Score</em></small></h2>
+                      <h2><div class="text-center"id="score10"></div></h2>
+                    </div>
+                  </div>    
+                </div>
+              </div>
+              </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <br><br>
+                <span class="large_font">Investors: </span>  
+                <span class="small1_font"id="investors10"></span>     
+                <span class="small1_font"> and more!</span>  
+              </div>
+            </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /.modal -->
+
+ <div class="row-fluid" style="padding-left: 100px; padding-right: 100px;">
+    <div class="well">
+      <center><a href="/"><h1 class="splash">VentureNetwork</h1></a>
+      <h1><small>Recommend the best startup for you</small></h1>
+      <br><br>
+      <input style="width: 400px; height:50px; font-size:25px;" 
+      id="investorname" type="text" placeholder="Your name or your firm's name"></input>
+      <button style="font-size:25px; height:50px;" onclick="someFunc();">Recommend!</button>
+    </center>
+    </div>
+  </div>
+  <div class="row-fluid">
+    <div class="well" id="myContainer" style="display:none;">
+      <table class="table table-striped" id="myTable">
+        <thead>
+          <tr> <td><div class="center-block"><div class="text-center"><h3>Ranking</h3></div></div></td> <td><div class="text-center"><h3>Company</h3></div></td> <td><div class="text-center"></div></td> <td><div class="text-left"><h3>Market</h3></div></td> </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="text-center"><h3>1</h3></div></td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>  
+          </tr>
+          <tr>
+            <td><div class="text-center"><h3>2</h3></div></td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>  
+          </tr>
+          <tr>
+            <td><div class="text-center"><h3>3</h3></div></td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>  
+          </tr>
+          <tr>
+            <td><div class="text-center"><h3>4</h3></div></td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>  
+          </tr>
+          <tr>
+            <td><div class="text-center"><h3>5</h3></div></td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>  
+          </tr>
+          <tr>
+            <td><div class="text-center"><h3>6</h3></div></td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>  
+          </tr>
+          <tr>
+            <td><div class="text-center"><h3>7</h3></div></td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>  
+          </tr>
+          <tr>
+            <td><div class="text-center"><h3>8</h3></div></td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>  
+          </tr>
+          <tr>
+            <td><div class="text-center"><h3>9</h3></div></td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>  
+          </tr>
+          <tr>
+            <td><div class="text-center"><h3>10</h3></div></td>
+            <td>
+            </td>
+            <td>
+            </td>
+            <td>
+            </td>  
+          </tr>
+        </tbody>
+      </table>
+      </div>
+  </div>
+</div>
+
+{% endblock %}
+
+
